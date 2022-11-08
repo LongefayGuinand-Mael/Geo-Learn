@@ -2,7 +2,6 @@ import 'package:GeoLearn/Data/DataSources/MenuItem_DataSource.dart';
 import 'package:GeoLearn/Data/DataSources/MockMenuItem_DataSource.dart';
 import 'package:GeoLearn/Data/Models/MenuItem_Model.dart';
 
-
 class MenuItem_UseCase {
   List<MenuItem_Model> getMenuItem() {
     MenuItem_DataSource Menu_DataSource = MockMenuItem_DataSource();

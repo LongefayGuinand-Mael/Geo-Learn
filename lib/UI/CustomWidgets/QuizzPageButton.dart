@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class QuizzPageButton extends StatefulWidget {
   final String labelText;
   final Function function;

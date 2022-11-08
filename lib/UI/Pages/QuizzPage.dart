@@ -3,7 +3,6 @@ import 'package:GeoLearn/Domain/Managers/QuestionsManager.dart';
 import 'package:GeoLearn/UI/CustomWidgets/QuizzPageButton.dart';
 import 'package:flutter/material.dart';
 
-
 class QuizzPage extends StatefulWidget {
   @override
   State<QuizzPage> createState() => _QuizzPageState();
