@@ -1,4 +1,6 @@
 import 'package:GeoLearn/UI/Pages/HomePage.dart';
+import 'package:GeoLearn/UI/Pages/LearnPage.dart';
+import 'package:GeoLearn/UI/Pages/QuizzPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +20,12 @@ class MyApp extends StatelessWidget {
           primary: const Color(0xFF4B9589),
         ),
       ),
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/quizz': (context) => QuizzPage(),
+        '/learn': (context) => LearnPage(),
+      },
     );
   }
 }

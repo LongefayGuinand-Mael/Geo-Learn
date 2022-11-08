@@ -8,27 +8,27 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
     return [
       MenuItem_Model(
         'LEARN',
+        '/learn',
         const Icon(
           Icons.school_rounded,
           color: Color(0xFF3A736A),
         ),
-        '/learn',
       ),
       MenuItem_Model(
         'QUIZZES',
+        '/quizz',
         const Icon(
           Icons.quiz_outlined,
           color: Color(0xFF3A736A),
         ),
-        '/quiz',
       ),
       MenuItem_Model(
         'Other Test',
+        '/',
         const Icon(
           Icons.add_box_rounded,
           color: Color(0xFF3A736A),
         ),
-        '/quiz',
       ),
     ];
   }

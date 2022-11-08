@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class HomePageButton extends StatefulWidget {
   final String labelText;
   final Icon icon;
-  const HomePageButton({
-    Key? key,
-    required this.labelText,
-    required this.icon,
-  }) : super(key: key);
+  final String route;
+  const HomePageButton(
+      {Key? key,
+      required this.labelText,
+      required this.icon,
+      required this.route})
+      : super(key: key);
 
   @override
   State<HomePageButton> createState() => _HomePageButtonState();
@@ -18,8 +20,7 @@ class _HomePageButtonState extends State<HomePageButton> {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        // TODO : Faire le lien avec la bonne route (à mettre en entrée du custom-widget [PRÉREQUIS])
-        //Navigator.pushNamed(context, "/");
+        Navigator.pushNamed(context, widget.route);
       },
       style: ButtonStyle(
         overlayColor: MaterialStateProperty.resolveWith(

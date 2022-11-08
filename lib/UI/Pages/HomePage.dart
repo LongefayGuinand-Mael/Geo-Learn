@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 Opacity(
-                  opacity: 0.85,
+                  opacity: 0.925,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Image.asset(
@@ -52,6 +52,7 @@ class HomePage extends StatelessWidget {
                             return HomePageButton(
                               labelText: _MenuItem[index].menuName,
                               icon: _MenuItem[index].menuIcon,
+                              route: _MenuItem[index].pageRoute,
                             );
                           },
                         ),
