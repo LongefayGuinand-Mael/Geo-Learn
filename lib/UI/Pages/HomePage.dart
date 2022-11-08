@@ -4,6 +4,7 @@ import 'package:GeoLearn/UI/CustomWidgets/DidYouKnow.dart';
 import 'package:GeoLearn/UI/CustomWidgets/HomePageButton.dart';
 import 'package:flutter/material.dart';
 
+
 //TODO ==> LOGO APP à ajouter
 
 class HomePage extends StatelessWidget {

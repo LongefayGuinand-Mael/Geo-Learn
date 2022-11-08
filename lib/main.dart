@@ -3,6 +3,7 @@ import 'package:GeoLearn/UI/Pages/LearnPage.dart';
 import 'package:GeoLearn/UI/Pages/QuizzPage.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
