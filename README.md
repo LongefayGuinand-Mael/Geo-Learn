@@ -1,6 +1,6 @@
 # GeoLearn
 
-This is a school project.
+This is a Master-2 school project (ESME Sudria school, major in Embedded Systems).
 
 
 ## Goal
