@@ -4,4 +4,3 @@ class DidYouKnow_Model {
     this.text,
   );
 }
-

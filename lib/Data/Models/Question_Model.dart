@@ -14,7 +14,6 @@ class Question_Model {
   );
 }
 
-
 enum QuestionType {
   IMAGE,
   TEXT,
