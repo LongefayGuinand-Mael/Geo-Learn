@@ -18,9 +18,7 @@ class _QuizzPageButtonState extends State<QuizzPageButton> {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        setState(() {
-          widget.function;
-        });
+        widget.function;
       },
       style: ButtonStyle(
           overlayColor: MaterialStateProperty.resolveWith(

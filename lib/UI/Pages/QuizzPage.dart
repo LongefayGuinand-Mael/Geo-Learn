@@ -23,7 +23,13 @@ class _QuizzPageState extends State<QuizzPage> {
             children: [
               Text(question.questionSubject),
               Text(question.questionText),
-              Image.network(question.data),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 5),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Image.network(question.data),
+              ),
               Container(
                 height: 10,
                 color: Colors.transparent,
@@ -43,8 +49,10 @@ class _QuizzPageState extends State<QuizzPage> {
                           return QuizzPageButton(
                             labelText: question.responses.keys.elementAt(index),
                             function: () {
-                              questionsManager.submitResponse(
-                                  question.responses.keys.elementAt(index));
+                              setState(() {
+                                questionsManager.submitResponse(
+                                    question.responses.keys.elementAt(index));
+                              });
                               print(question.responses.values.elementAt(index));
                             },
                           );
