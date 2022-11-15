@@ -23,6 +23,14 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
         ),
       ),
       MenuItem_Model(
+        'MAPS',
+        '/maps',
+        const Icon(
+          Icons.map_outlined,
+          color: Color(0xFF3A736A),
+        ),
+      ),
+      MenuItem_Model(
         'Other Test',
         '/',
         const Icon(

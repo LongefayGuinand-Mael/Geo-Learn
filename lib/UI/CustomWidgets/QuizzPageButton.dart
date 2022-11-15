@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class QuizzPageButton extends StatefulWidget {
   final String labelText;
-  final Function function;
+  final function;
   const QuizzPageButton({
     Key? key,
     required this.labelText,
@@ -17,9 +17,7 @@ class _QuizzPageButtonState extends State<QuizzPageButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        widget.function;
-      },
+      onPressed: widget.function,
       style: ButtonStyle(
           overlayColor: MaterialStateProperty.resolveWith(
             (states) => const Color(0xFF4B9589).withOpacity(0.1),
