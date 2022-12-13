@@ -1,7 +1,7 @@
 import 'package:GeoLearn/Data/Models/Question_Model.dart';
 import 'package:GeoLearn/Domain/Managers/QuestionsManager.dart';
 import 'package:GeoLearn/UI/CustomWidgets/QuizzPageButton.dart';
-import 'package:GeoLearn/UI/Pages/PartyFinishedPage.dart';
+import 'package:GeoLearn/UI/Pages/Quizz/PartyFinishedPage.dart';
 import 'package:flutter/material.dart';
 
 class QuizzPage extends StatefulWidget {

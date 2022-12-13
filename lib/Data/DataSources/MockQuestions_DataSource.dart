@@ -24,6 +24,9 @@ class MockQuestions_DataSource implements Questions_DataSource {
         "A quel pays est ce drapeau ?",
         "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/langfr-2560px-Flag_of_the_United_Kingdom_%283-5%29.svg.png",
         {
+          "Danemark": false,
+          "Irlande": false,
+          "Islande": false,
           "Royaume Uni": true,
           "Australie": false,
         },

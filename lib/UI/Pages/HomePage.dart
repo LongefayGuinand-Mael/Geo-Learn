@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                 Opacity(
                   opacity: 0.925,
                   child: SizedBox(
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                         child: Container(),
                       ),
                       Flexible(
-                        flex: 6,
+                        flex: 8,
                         child: ListView.builder(
                           itemCount: _MenuItem.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -63,6 +63,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
+                // const SizedBox(height: 15),
               ],
             ),
           ),

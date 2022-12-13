@@ -37,7 +37,7 @@ class _HomePageButtonState extends State<HomePageButton> {
         ),
       ),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.6,
+        width: MediaQuery.of(context).size.width * 0.70,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
@@ -46,7 +46,7 @@ class _HomePageButtonState extends State<HomePageButton> {
             children: [
               widget.icon,
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.45,
+                width: MediaQuery.of(context).size.width * 0.5,
                 child: Center(
                   child: Text(
                     widget.labelText,

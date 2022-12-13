@@ -8,15 +8,4 @@ class MenuItem_UseCase {
     var allMenus = Menu_DataSource.getAllMenuItem();
     return allMenus;
   }
-
-  // Widget getMenuItemPage(MenuItem_Model menuItem) {
-  //   switch (menuItem.menuName) {
-  //     case "LEARN":
-  //       return LearnPage();
-  //     case "QUIZZES":
-  //       return QuizzPage();
-  //     default:
-  //       return HomePage();
-  //   }
-  // }
 }

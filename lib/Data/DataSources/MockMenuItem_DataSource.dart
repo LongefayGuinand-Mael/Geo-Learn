@@ -7,7 +7,7 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
   List<MenuItem_Model> getAllMenuItem() {
     return [
       MenuItem_Model(
-        'LEARN',
+        'Learn',
         '/learn',
         const Icon(
           Icons.school_rounded,
@@ -15,26 +15,34 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
         ),
       ),
       MenuItem_Model(
-        'QUIZZES',
+        'Quizzes',
         '/quizz',
         const Icon(
           Icons.quiz_outlined,
           color: Color(0xFF3A736A),
         ),
       ),
+      // MenuItem_Model(
+      //   'Maps',
+      //   '/maps',
+      //   const Icon(
+      //     Icons.map_outlined,
+      //     color: Color(0xFF3A736A),
+      //   ),
+      // ),
       MenuItem_Model(
-        'MAPS',
-        '/maps',
+        'Create and Sending Quizz',
+        '/quizz_creation',
         const Icon(
-          Icons.map_outlined,
+          Icons.send_to_mobile,
           color: Color(0xFF3A736A),
         ),
       ),
       MenuItem_Model(
-        'Other Test',
-        '/',
+        'Receiving Quizz',
+        '/quizz_receiving',
         const Icon(
-          Icons.add_box_rounded,
+          Icons.install_mobile,
           color: Color(0xFF3A736A),
         ),
       ),
