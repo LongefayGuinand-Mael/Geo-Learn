@@ -15,6 +15,7 @@ class QRDisplayPopUp extends StatefulWidget {
 class _QRDisplayPopUpState extends State<QRDisplayPopUp> {
   @override
   Widget build(BuildContext context) {
+    String _QRValue = widget.QRValue;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -29,16 +30,16 @@ class _QRDisplayPopUpState extends State<QRDisplayPopUp> {
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.width * 0.8,
                   child: Center(
                     child: PrettyQr(
-                      image: AssetImage(
+                      image: const AssetImage(
                         'assets/images/logos/GreenLogoGeoLearn.png',
                       ),
-                      size: MediaQuery.of(context).size.width * 0.775,
-                      data: 'https://www.google.fr',
+                      size: MediaQuery.of(context).size.width * 0.75,
+                      data: _QRValue,
                       errorCorrectLevel: QrErrorCorrectLevel.H,
                       typeNumber: null,
                       roundEdges: true,

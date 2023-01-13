@@ -31,19 +31,29 @@ class _QuizzPageState extends State<QuizzPage> {
               padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
-                  Text(question.questionSubject),
-                  Text(question.questionText),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 5),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Image.network(question.data),
+                  Text("Thème :  ${question.questionSubject}"),
+                  Text("Question :  ${question.questionText}"),
+                  const SizedBox(
+                    height: 5,
                   ),
-                  Container(
-                    height: 10,
-                    color: Colors.transparent,
-                  ),
+                  (question.questionType == QuestionType.IMAGE)
+                      ? Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 5),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Image.network(question.data),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        )
+                      : const SizedBox(
+                          height: 5,
+                        ),
                   Flexible(
                     flex: 6,
                     child: Row(

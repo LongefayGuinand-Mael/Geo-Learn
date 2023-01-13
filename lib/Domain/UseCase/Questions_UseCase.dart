@@ -9,7 +9,7 @@ class Questions_UseCase {
     return question;
   }
 
-  bool? isCorrectAnswer(Question_Model question, String response) {
-    return question.responses[response];
+  bool isCorrectAnswer(Question_Model question, String response) {
+    return question.responses[response] ?? false;
   }
 }

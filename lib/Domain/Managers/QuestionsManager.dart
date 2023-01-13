@@ -34,7 +34,7 @@ class QuestionsManager {
   }
 
   bool submitResponse(String response) {
-    bool? isCorrect =
+    bool isCorrect =
         Questions_UseCase().isCorrectAnswer(getCurrentQuestion(), response);
 
     if (isCorrect == true) {

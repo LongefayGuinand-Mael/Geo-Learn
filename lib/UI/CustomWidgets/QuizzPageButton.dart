@@ -19,16 +19,19 @@ class _QuizzPageButtonState extends State<QuizzPageButton> {
     return TextButton(
       onPressed: widget.function,
       style: ButtonStyle(
-          overlayColor: MaterialStateProperty.resolveWith(
-            (states) => const Color(0xFF4B9589).withOpacity(0.1),
+        overlayColor: MaterialStateProperty.resolveWith(
+          (states) => const Color(0xFF4B9589).withOpacity(0.1),
+        ),
+        shape: MaterialStateProperty.all<BeveledRectangleBorder>(
+          BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+            side: const BorderSide(
+              color: Color(0xFF3A736A),
+              width: 1.2,
+            ),
           ),
-          shape: MaterialStateProperty.all<BeveledRectangleBorder>(
-              BeveledRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  side: const BorderSide(
-                    color: Color(0xFF3A736A),
-                    width: 1.2,
-                  )))),
+        ),
+      ),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.6,
         child: Padding(
