@@ -44,7 +44,7 @@ class _QuizzPageState extends State<QuizzPage> {
                                 border: Border.all(width: 5),
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: Image.network(question.data),
+                              child: Image.network(question.pictureURL),
                             ),
                             const SizedBox(
                               height: 10,
@@ -64,16 +64,15 @@ class _QuizzPageState extends State<QuizzPage> {
                         Flexible(
                           flex: 6,
                           child: ListView.builder(
-                            itemCount: question.responses.length,
+                            itemCount: question.answerList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return QuizzPageButton(
-                                labelText:
-                                    question.responses.keys.elementAt(index),
+                                labelText: question.answerList
+                                    .elementAt(index), //.keys.elementAt(index),
                                 function: () {
                                   setState(() {
-                                    questionsManager.submitResponse(question
-                                        .responses.keys
-                                        .elementAt(index));
+                                    questionsManager.submitResponse(
+                                        question.answerList.elementAt(index));
                                   });
                                 },
                               );

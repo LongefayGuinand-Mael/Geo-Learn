@@ -1,5 +1,4 @@
 import 'package:GeoLearn/UI/Pages/HomePage.dart';
-import 'package:GeoLearn/UI/Pages/LearnPage.dart';
 import 'package:GeoLearn/UI/Pages/QR_SendingReceiving/QRScanningPage.dart';
 import 'package:GeoLearn/UI/Pages/QR_SendingReceiving/QuizzCreationPage.dart';
 import 'package:GeoLearn/UI/Pages/Quizz/QuizzPage.dart';
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/quizz': (context) => QuizzPage(),
-        '/learn': (context) => LearnPage(),
+        // '/learn': (context) => LearnPage(),
         '/quizz_creation': (context) => QuizzCreationPage(),
         '/quizz_receiving': (context) => const QRScanningPage(),
       },

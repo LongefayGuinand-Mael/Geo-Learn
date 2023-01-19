@@ -10,6 +10,11 @@ class Questions_UseCase {
   }
 
   bool isCorrectAnswer(Question_Model question, String response) {
-    return question.responses[response] ?? false;
+    for (var i = 0; i < question.answerList.length; i++) {
+      if (question.answerList[i] == response) {
+        return true;
+      }
+    }
+    return false;
   }
 }

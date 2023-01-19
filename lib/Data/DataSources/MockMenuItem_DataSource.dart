@@ -6,14 +6,14 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
   @override
   List<MenuItem_Model> getAllMenuItem() {
     return [
-      MenuItem_Model(
-        'Learn',
-        '/learn',
-        const Icon(
-          Icons.school_rounded,
-          color: Color(0xFF3A736A),
-        ),
-      ),
+      // MenuItem_Model(
+      //   'Learn',
+      //   '/learn',
+      //   const Icon(
+      //     Icons.school_rounded,
+      //     color: Color(0xFF3A736A),
+      //   ),
+      // ),
       MenuItem_Model(
         'Quizzes',
         '/quizz',

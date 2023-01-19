@@ -67,7 +67,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                                     border: Border.all(width: 5),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  child: Image.network(question.data),
+                                  child: Image.network(question.pictureURL),
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -87,11 +87,11 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                             Flexible(
                               flex: 6,
                               child: ListView.builder(
-                                itemCount: question.responses.length,
+                                itemCount: question.answerList.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return QuizzPageButton(
-                                    labelText: question.responses.keys
-                                        .elementAt(index),
+                                    labelText:
+                                        question.answerList.elementAt(index),
                                     function: () {},
                                   );
                                 },
