@@ -67,8 +67,7 @@ class _QuizzPageState extends State<QuizzPage> {
                             itemCount: question.answerList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return QuizzPageButton(
-                                labelText: question.answerList
-                                    .elementAt(index), //.keys.elementAt(index),
+                                answer: question.answerList.elementAt(index),
                                 function: () {
                                   setState(() {
                                     questionsManager.submitResponse(

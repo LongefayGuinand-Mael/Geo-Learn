@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:GeoLearn/Data/DataSources/MockQuestions_DataSource.dart';
 import 'package:GeoLearn/Data/DataSources/Questions_DataSource.dart';
+import 'package:GeoLearn/Data/Firebase/AddJsonToDatabase.dart';
+import 'package:GeoLearn/Data/Firebase/GetJsonFromQRCode.dart';
 import 'package:GeoLearn/Data/Models/Question_Model.dart';
 import 'package:GeoLearn/Domain/Managers/QuestionsManager.dart';
 import 'package:GeoLearn/UI/CustomWidgets/HeroDialog.dart';
@@ -10,6 +12,8 @@ import 'package:GeoLearn/UI/Pages/QR_SendingReceiving/QRDisplayPopUp.dart';
 import 'package:flutter/material.dart';
 
 class QuizzCreationPage extends StatefulWidget {
+  const QuizzCreationPage({super.key});
+
   @override
   State<QuizzCreationPage> createState() => _QuizzCreationPageState();
 }
@@ -40,8 +44,8 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.95,
-                  height: MediaQuery.of(context).size.width * 1.45,
-                  padding: const EdgeInsets.all(16.0),
+                  height: MediaQuery.of(context).size.height * 0.62,
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 2,
@@ -57,7 +61,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                       Text("Thème :  ${question.questionSubject}"),
                       Text("Question :  ${question.questionText}"),
                       const SizedBox(
-                        height: 5,
+                        height: 4,
                       ),
                       (question.questionType == QuestionType.IMAGE)
                           ? Column(
@@ -70,12 +74,12 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                                   child: Image.network(question.pictureURL),
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 8,
                                 ),
                               ],
                             )
                           : const SizedBox(
-                              height: 5,
+                              height: 4,
                             ),
                       Flexible(
                         flex: 6,
@@ -90,7 +94,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                                 itemCount: question.answerList.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return QuizzPageButton(
-                                    labelText:
+                                    answer:
                                         question.answerList.elementAt(index),
                                     function: () {},
                                   );
@@ -107,7 +111,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 4,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -132,7 +136,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                   ],
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 4,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -148,6 +152,15 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                     );
                   },
                   child: const Text('Sending by QR'),
+                ),
+                // =================================================================================================================================
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AddJsonToDatabase(""),
+                    GetJsonFromQRCode(""),
+                  ],
                 ),
               ],
             ),

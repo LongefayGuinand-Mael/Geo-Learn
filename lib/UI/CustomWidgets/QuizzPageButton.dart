@@ -1,11 +1,13 @@
+import 'package:GeoLearn/Data/Models/Question_Model.dart';
 import 'package:flutter/material.dart';
 
 class QuizzPageButton extends StatefulWidget {
-  final String labelText;
+  final Answer answer;
   final function;
+
   const QuizzPageButton({
     Key? key,
-    required this.labelText,
+    required this.answer,
     required this.function,
   }) : super(key: key);
 
@@ -40,7 +42,7 @@ class _QuizzPageButtonState extends State<QuizzPageButton> {
             width: MediaQuery.of(context).size.width * 0.45,
             child: Center(
               child: Text(
-                widget.labelText,
+                widget.answer.toString(),
                 style: const TextStyle(
                   color: Color(0xFF3A736A),
                 ),

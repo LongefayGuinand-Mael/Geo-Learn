@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:GeoLearn/Data/DataSources/MockQuestions_DataSource.dart';
 import 'package:GeoLearn/Data/DataSources/Questions_DataSource.dart';
 import 'package:GeoLearn/Data/Models/Question_Model.dart';
-import 'package:GeoLearn/Domain/UseCase/Questions_UseCase.dart';
 
 class QuestionsManager {
   late List<Question_Model> _questions;
@@ -33,9 +32,9 @@ class QuestionsManager {
     return _isPartyFinish;
   }
 
-  bool submitResponse(String response) {
-    bool isCorrect =
-        Questions_UseCase().isCorrectAnswer(getCurrentQuestion(), response);
+  bool submitResponse(Answer a) {
+    bool isCorrect = a.isValid;
+    // Questions_UseCase().isCorrectAnswer(getCurrentQuestion(),a);
 
     if (isCorrect == true) {
       _score += 1;
