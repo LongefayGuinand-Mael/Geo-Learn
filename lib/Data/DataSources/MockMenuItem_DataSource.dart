@@ -1,12 +1,12 @@
 import 'package:GeoLearn/Data/DataSources/MenuItem_DataSource.dart';
-import 'package:GeoLearn/Data/Models/MenuItem_Model.dart';
+import 'package:GeoLearn/Data/Models/MenuItemModel.dart';
 import 'package:flutter/material.dart';
 
 class MockMenuItem_DataSource implements MenuItem_DataSource {
   @override
-  List<MenuItem_Model> getAllMenuItem() {
+  List<MenuItemModel> getAllMenuItem() {
     return [
-      // MenuItem_Model(
+      // MenuItemModel(
       //   'Learn',
       //   '/learn',
       //   const Icon(
@@ -14,7 +14,7 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
       //     color: Color(0xFF3A736A),
       //   ),
       // ),
-      MenuItem_Model(
+      MenuItemModel(
         'Quizzes',
         '/quizz',
         const Icon(
@@ -22,7 +22,7 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
           color: Color(0xFF3A736A),
         ),
       ),
-      // MenuItem_Model(
+      // MenuItemModel(
       //   'Maps',
       //   '/maps',
       //   const Icon(
@@ -30,7 +30,7 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
       //     color: Color(0xFF3A736A),
       //   ),
       // ),
-      MenuItem_Model(
+      MenuItemModel(
         'Create and Sending Quizz',
         '/quizz_creation',
         const Icon(
@@ -38,7 +38,7 @@ class MockMenuItem_DataSource implements MenuItem_DataSource {
           color: Color(0xFF3A736A),
         ),
       ),
-      MenuItem_Model(
+      MenuItemModel(
         'Receiving Quizz',
         '/quizz_receiving',
         const Icon(

@@ -1,7 +1,7 @@
-import 'package:GeoLearn/Data/Models/DidYouKnow_Model.dart';
+import 'package:GeoLearn/Data/Models/DidYouKnowModel.dart';
 
 class DidYouKnow_DataSource {
-  List<DidYouKnow_Model> getAllDidYouKnow() {
+  List<DidYouKnowModel> getAllDidYouKnow() {
     return this.getAllDidYouKnow();
     // return this.empty();
   }

@@ -1,4 +1,4 @@
-import 'package:GeoLearn/Data/Models/Question_Model.dart';
+import 'package:GeoLearn/Data/Models/QuestionModel.dart';
 import 'package:flutter/material.dart';
 
 class QuizzPageButton extends StatefulWidget {

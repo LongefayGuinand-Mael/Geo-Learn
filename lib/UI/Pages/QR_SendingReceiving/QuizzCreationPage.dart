@@ -1,15 +1,11 @@
-import 'dart:math';
-
-import 'package:GeoLearn/Data/DataSources/MockQuestions_DataSource.dart';
-import 'package:GeoLearn/Data/DataSources/Questions_DataSource.dart';
-import 'package:GeoLearn/Data/Firebase/AddJsonToDatabase.dart';
-import 'package:GeoLearn/Data/Firebase/GetJsonFromQRCode.dart';
-import 'package:GeoLearn/Data/Models/Question_Model.dart';
-import 'package:GeoLearn/Domain/Managers/QuestionsManager.dart';
+import 'package:GeoLearn/Data/Models/QuestionModel.dart';
+import 'package:GeoLearn/Domain/Managers/QuizzCreationQuestionsManager.dart';
 import 'package:GeoLearn/UI/CustomWidgets/HeroDialog.dart';
 import 'package:GeoLearn/UI/CustomWidgets/QuizzPageButton.dart';
 import 'package:GeoLearn/UI/Pages/QR_SendingReceiving/QRDisplayPopUp.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class QuizzCreationPage extends StatefulWidget {
   const QuizzCreationPage({super.key});
@@ -19,20 +15,40 @@ class QuizzCreationPage extends StatefulWidget {
 }
 
 class _QuizzCreationPageState extends State<QuizzCreationPage> {
-  QuestionsManager questionsManager = QuestionsManager();
+  QuizzCreationQuestionsManager quizzCreationQuestionsManager =
+      QuizzCreationQuestionsManager();
+
+  CollectionReference databaseCollection =
+      FirebaseFirestore.instance.collection('SharableQuizzes');
+
+  String? quizzID;
+  List<QuestionModel> quizzList = [];
+
+  String QuestionListToJson(List<QuestionModel> questionList) {
+    String jsonQuestionList = "[";
+    for (var i = 0; i < quizzList.length; i++) {
+      jsonQuestionList += QuestionToJson(quizzList[i]);
+      if (i + 1 < quizzList.length) {
+        jsonQuestionList += ", ";
+      }
+    }
+    jsonQuestionList += "]";
+    // print(jsonQuestionList);
+    return jsonQuestionList;
+  }
+
+  String QuestionToJson(QuestionModel question) {
+    // print(question.toJson().toString());
+    return question.toJson().toString();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Question_Model question = questionsManager.getCurrentQuestion();
+    QuestionModel question = quizzCreationQuestionsManager.getCurrentQuestion();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quizz Creation'),
-        actions: [
-          ElevatedButton(
-            onPressed: () async {},
-            child: const Text("GPT3"),
-          ),
-        ],
       ),
       body: Center(
         child: Scaffold(
@@ -44,7 +60,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.95,
-                  height: MediaQuery.of(context).size.height * 0.62,
+                  height: MediaQuery.of(context).size.height * 0.62, // 0.65
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -52,7 +68,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                     ),
                     borderRadius: const BorderRadius.all(
                       Radius.circular(
-                        5,
+                        8,
                       ),
                     ),
                   ),
@@ -120,47 +136,56 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          Questions_DataSource questions_dataSource =
-                              MockQuestions_DataSource();
-                          var _questions = questions_dataSource.getQuestions();
-                          Random().nextInt(_questions.length);
+                          quizzCreationQuestionsManager.passQuestion();
                         });
-                        //questionManager._currentQuestionIndex = Random().nextInt(_questions.length);
                       },
                       child: const Text('Question Suivante'),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // ADD QUESTION TO QUIZZLIST
+                        quizzList.add(question);
+                        // DISPLAY A NEW QUESTION ON THE PHONE
+                        setState(() {
+                          quizzCreationQuestionsManager.passQuestion();
+                        });
+                      },
                       child: const Text('Ajouter au Quizz'),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 4,
-                ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      HeroDialogRoute(
-                        builder: (context) => Center(
-                          child: QRDisplayPopUp(
-                            QRValue:
-                                "https://www.youtube.com/watch?v=dQw4w9WgXcQ", //RICK ROLL (for now)
+                    // CHECK SI LA LISTE DE QUESTION N'EST PAS VIDE
+                    if (quizzList.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "You cannot submit the quiz at this time because you have not chosen a question yet.\n\nPlease provide at least 1 question to the quizz to be able to send it.\n",
                           ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      // CREATE THE "quizzID" FOR MAKE THE FIREBASE DOC
+                      quizzID = const Uuid().v4();
+                      // SEND JSON TO "quizzID Firebase Doc"
+                      databaseCollection.doc(quizzID).set({
+                        'json': QuestionListToJson(quizzList),
+                      });
+                      // DISPLAY QR WITH "quizzID"
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(
+                        HeroDialogRoute(
+                          builder: (context) => Center(
+                            child: QRDisplayPopUp(
+                              QRValue: quizzID!,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
                   },
                   child: const Text('Sending by QR'),
-                ),
-                // =================================================================================================================================
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AddJsonToDatabase(""),
-                    GetJsonFromQRCode(""),
-                  ],
                 ),
               ],
             ),

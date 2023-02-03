@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +29,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
-        '/quizz': (context) => QuizzPage(),
+        '/quizz': (context) => const QuizzPage(
+              firestoreID: "",
+            ),
         // '/learn': (context) => LearnPage(),
         '/quizz_creation': (context) => const QuizzCreationPage(),
         '/quizz_receiving': (context) => const QRScanningPage(),

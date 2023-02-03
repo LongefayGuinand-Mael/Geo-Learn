@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MenuItem_Model {
+class MenuItemModel {
   final String menuName;
   final pageRoute;
   final Icon menuIcon;
-  MenuItem_Model(
+  MenuItemModel(
     this.menuName,
     this.pageRoute,
     this.menuIcon,

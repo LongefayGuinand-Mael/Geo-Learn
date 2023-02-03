@@ -1,3 +1,4 @@
+import 'package:GeoLearn/UI/Pages/Quizz/QuizzPage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -20,43 +21,65 @@ class _QRScanningPageState extends State<QRScanningPage> {
       appBar: AppBar(
         title: const Text('Scan for Receiving Quizz \nfrom an Other Phone'),
         actions: [
-          ElevatedButton(
-            onPressed: () async {
-              await controller?.toggleFlash();
-              setState(() {});
-            },
-            child: FutureBuilder(
-              future: controller?.getFlashStatus(),
-              builder: (context, snapshot) {
-                if (snapshot.data == true) {
-                  return const Icon(Icons.flash_on, color: Colors.yellow);
-                } else if (snapshot.data == false) {
-                  return const Icon(Icons.flash_off, color: Colors.grey);
-                } else {
-                  return const Icon(Icons.error_outline, color: Colors.black);
-                }
-              },
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              await controller?.flipCamera();
-              setState(() {});
-            },
-            child: FutureBuilder(
-              future: controller?.getCameraInfo(),
-              builder: (context, snapshot) {
-                if (snapshot.data != null) {
-                  if (describeEnum(snapshot.data!) == "front") {
-                    return const Icon(Icons.camera_front);
-                  }
-                  return const Icon(Icons.camera_rear);
-                } else {
-                  return const Text('loading');
-                }
-              },
-            ),
-          ),
+          // ===================== POUR DES TEST SUR PC =====================
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.of(context).pop();
+          //     Navigator.of(context).push(
+          //       MaterialPageRoute(
+          //         builder: (context) => const QuizzPage(
+          //           firestoreID: "f58cf727-833d-4a6c-b3d1-035fc65e4a34",
+          //         ),
+          //       ),
+          //     );
+          //   },
+          //   child: const Text(
+          //     "Test-PC",
+          //   ),
+          // ),
+          // ================================================================
+          (result == null)
+              ? ElevatedButton(
+                  onPressed: () async {
+                    await controller?.toggleFlash();
+                    setState(() {});
+                  },
+                  child: FutureBuilder(
+                    future: controller?.getFlashStatus(),
+                    builder: (context, snapshot) {
+                      if (snapshot.data == true) {
+                        return const Icon(Icons.flash_on, color: Colors.yellow);
+                      } else if (snapshot.data == false) {
+                        return const Icon(Icons.flash_off, color: Colors.grey);
+                      } else {
+                        return const Icon(Icons.error_outline,
+                            color: Colors.black);
+                      }
+                    },
+                  ),
+                )
+              : const SizedBox(),
+          (result == null)
+              ? ElevatedButton(
+                  onPressed: () async {
+                    await controller?.flipCamera();
+                    setState(() {});
+                  },
+                  child: FutureBuilder(
+                    future: controller?.getCameraInfo(),
+                    builder: (context, snapshot) {
+                      if (snapshot.data != null) {
+                        if (describeEnum(snapshot.data!) == "front") {
+                          return const Icon(Icons.camera_front);
+                        }
+                        return const Icon(Icons.camera_rear);
+                      } else {
+                        return const Text('loading');
+                      }
+                    },
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
       body: _buildQrView(context),
@@ -90,6 +113,14 @@ class _QRScanningPageState extends State<QRScanningPage> {
         setState(
           () {
             result = scanData;
+            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => QuizzPage(
+                  firestoreID: result!.code.toString(),
+                ),
+              ),
+            );
           },
         );
       },
