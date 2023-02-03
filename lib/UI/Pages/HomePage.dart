@@ -1,4 +1,3 @@
-import 'package:GeoLearn/Domain/UseCase/DYK_UseCase.dart';
 import 'package:GeoLearn/Domain/UseCase/MenuItem_UseCase.dart';
 import 'package:GeoLearn/UI/CustomWidgets/DidYouKnow.dart';
 import 'package:GeoLearn/UI/CustomWidgets/HomePageButton.dart';
@@ -23,7 +22,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.025),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.075),
                 Opacity(
                   opacity: 0.925,
                   child: SizedBox(
@@ -35,9 +34,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
-                DidYouKnow(
-                  didYouKnowText: DidYouKnow_UseCase().getTodayDidYouKnow(),
-                ),
+                const DidYouKnow(),
                 Flexible(
                   child: Row(
                     children: [
@@ -63,7 +60,6 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                // const SizedBox(height: 15),
               ],
             ),
           ),
