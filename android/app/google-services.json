@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "773717397567",
+    "project_id": "geolearn-4ac7d",
+    "storage_bucket": "geolearn-4ac7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773717397567:android:035e9c8f3e3fcf6b71a88a",
+        "android_client_info": {
+          "package_name": "com.esme_3s.geo_learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773717397567-qj7cg768mnljrsoige3hl1uikeb5nq14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRJrF228hCCnzTVb82q1YcjMGwZzdBxhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773717397567-qj7cg768mnljrsoige3hl1uikeb5nq14.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "773717397567-ak4md4ohgnrpil6q29c14dffiknt0o7u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.esme3s.geoLearn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
