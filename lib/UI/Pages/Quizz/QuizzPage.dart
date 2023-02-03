@@ -22,395 +22,117 @@ class _QuizzPageState extends State<QuizzPage> {
   @override
   Widget build(BuildContext context) {
     return EnhancedFutureBuilder(
-        future: questionsManager.loadData(
-          firestoreDocumentID: widget.firestoreID,
+      future: questionsManager.loadData(
+        firestoreDocumentID: widget.firestoreID,
+      ),
+      rememberFutureResult: true,
+      whenNotDone: Scaffold(
+        appBar: AppBar(
+          title: SizedBox(
+            child: Text(
+              (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
-        rememberFutureResult: true,
-        whenNotDone: Scaffold(
-          appBar: AppBar(
-            title: SizedBox(
-              child: Text(
-                (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-                textAlign: TextAlign.center,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              Text(
+                "Is Loading\nWaiting for connexion with the database",
               ),
-            ),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Text(
-                  "Is Loading\nWaiting for connexion with the database",
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                CircularProgressIndicator(),
-              ],
-            ),
+              SizedBox(
+                height: 8,
+              ),
+              CircularProgressIndicator(),
+            ],
           ),
         ),
-        whenDone: (snapshot) {
-          QuestionModel question = questionsManager.getCurrentQuestion();
-          return questionsManager.getIsFinished()
-              ? PartyFinishedPage(score: questionsManager.getCurrentScore())
-              : Scaffold(
-                  appBar: AppBar(
-                    title: SizedBox(
-                      child: Text(
-                        (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-                        textAlign: TextAlign.center,
+      ),
+      whenDone: (snapshot) {
+        QuestionModel question = questionsManager.getCurrentQuestion();
+        return questionsManager.getIsFinished()
+            ? PartyFinishedPage(
+                score: questionsManager.getCurrentScore(),
+                numberOfQuestions: (widget.firestoreID.isNotEmpty)
+                    ? questionsManager.questionList.length
+                    : 10,
+              )
+            : Scaffold(
+                appBar: AppBar(
+                  title: SizedBox(
+                    child: Text(
+                      (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                body: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Text("Thème :  ${question.questionSubject}"),
+                      Text("Question :  ${question.questionText}"),
+                      const SizedBox(
+                        height: 4,
                       ),
-                    ),
-                  ),
-                  body: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      children: [
-                        Text("Thème :  ${question.questionSubject}"),
-                        Text("Question :  ${question.questionText}"),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        (question.questionType == QuestionType.IMAGE)
-                            ? Column(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(width: 5),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Image.network(question.pictureURL),
+                      (question.questionType == QuestionType.IMAGE)
+                          ? Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(width: 5),
+                                    borderRadius: BorderRadius.circular(5),
                                   ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              )
-                            : const SizedBox(
-                                height: 5,
-                              ),
-                        Flexible(
-                          flex: 6,
-                          child: Row(
-                            children: [
-                              Flexible(
-                                child: Container(),
-                              ),
-                              Flexible(
-                                flex: 6,
-                                child: ListView.builder(
-                                  itemCount: question.answerList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return QuizzPageButton(
-                                      answer:
-                                          question.answerList.elementAt(index),
-                                      function: () {
-                                        setState(() {
-                                          questionsManager.submitResponse(
-                                              question.answerList
-                                                  .elementAt(index));
-                                        });
-                                      },
-                                    );
-                                  },
+                                  child: Image.network(question.pictureURL),
                                 ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            )
+                          : const SizedBox(
+                              height: 5,
+                            ),
+                      Flexible(
+                        flex: 6,
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Container(),
+                            ),
+                            Flexible(
+                              flex: 6,
+                              child: ListView.builder(
+                                itemCount: question.answerList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return QuizzPageButton(
+                                    answer:
+                                        question.answerList.elementAt(index),
+                                    function: () {
+                                      setState(() {
+                                        questionsManager.submitResponse(question
+                                            .answerList
+                                            .elementAt(index));
+                                      });
+                                    },
+                                  );
+                                },
                               ),
-                              Flexible(
-                                child: Container(),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                            ),
+                            Flexible(
+                              child: Container(),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                );
-        });
-    // ========================================================
-    // return FutureBuilderEx<dynamic>(
-    //   future: questionsManager.loadData(
-    //     firestoreDocumentID: widget.firestoreID,
-    //   ),
-    //   waitingBuilder: (context) {
-    //     return Scaffold(
-    //       appBar: AppBar(
-    //         title: SizedBox(
-    //           child: Text(
-    //             (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-    //             textAlign: TextAlign.center,
-    //           ),
-    //         ),
-    //       ),
-    //       body: Center(
-    //         child: Column(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           crossAxisAlignment: CrossAxisAlignment.center,
-    //           children: const [
-    //             Text(
-    //               "Is Loading\nWaiting for connexion with the database",
-    //             ),
-    //             SizedBox(
-    //               height: 8,
-    //             ),
-    //             CircularProgressIndicator(),
-    //           ],
-    //         ),
-    //       ),
-    //     );
-    //   },
-    //   builder: (context, snapshot) {
-    //     if (snapshot.hasError) {
-    //       return Scaffold(
-    //         appBar: AppBar(
-    //           title: SizedBox(
-    //             child: Text(
-    //               (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-    //               textAlign: TextAlign.center,
-    //             ),
-    //           ),
-    //         ),
-    //         body: Center(
-    //           child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             crossAxisAlignment: CrossAxisAlignment.center,
-    //             children: const [
-    //               Icon(Icons.error_outline),
-    //               SizedBox(
-    //                 height: 8,
-    //               ),
-    //               Text(
-    //                 "Error !",
-    //               ),
-    //               Text(
-    //                 "Failed to load data...\nTry to restart if wanted.",
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       );
-    //     } else {
-    //       QuestionModel question = questionsManager.getCurrentQuestion();
-    //       return questionsManager.getIsFinished()
-    //           ? PartyFinishedPage(score: questionsManager.getCurrentScore())
-    //           : Scaffold(
-    //               appBar: AppBar(
-    //                 title: SizedBox(
-    //                   child: Text(
-    //                     (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-    //                     textAlign: TextAlign.center,
-    //                   ),
-    //                 ),
-    //               ),
-    //               body: Padding(
-    //                 padding: const EdgeInsets.all(8),
-    //                 child: Column(
-    //                   children: [
-    //                     Text("Thème :  ${question.questionSubject}"),
-    //                     Text("Question :  ${question.questionText}"),
-    //                     const SizedBox(
-    //                       height: 4,
-    //                     ),
-    //                     (question.questionType == QuestionType.IMAGE)
-    //                         ? Column(
-    //                             children: [
-    //                               Container(
-    //                                 decoration: BoxDecoration(
-    //                                   border: Border.all(width: 5),
-    //                                   borderRadius: BorderRadius.circular(5),
-    //                                 ),
-    //                                 child: Image.network(question.pictureURL),
-    //                               ),
-    //                               const SizedBox(
-    //                                 height: 10,
-    //                               ),
-    //                             ],
-    //                           )
-    //                         : const SizedBox(
-    //                             height: 5,
-    //                           ),
-    //                     Flexible(
-    //                       flex: 6,
-    //                       child: Row(
-    //                         children: [
-    //                           Flexible(
-    //                             child: Container(),
-    //                           ),
-    //                           Flexible(
-    //                             flex: 6,
-    //                             child: ListView.builder(
-    //                               itemCount: question.answerList.length,
-    //                               itemBuilder:
-    //                                   (BuildContext context, int index) {
-    //                                 return QuizzPageButton(
-    //                                   answer:
-    //                                       question.answerList.elementAt(index),
-    //                                   function: () {
-    //                                     setState(() {
-    //                                       questionsManager.submitResponse(
-    //                                           question.answerList
-    //                                               .elementAt(index));
-    //                                     });
-    //                                   },
-    //                                 );
-    //                               },
-    //                             ),
-    //                           ),
-    //                           Flexible(
-    //                             child: Container(),
-    //                           ),
-    //                         ],
-    //                       ),
-    //                     )
-    //                   ],
-    //                 ),
-    //               ),
-    //             );
-    //     }
-    //   },
-    // );
-    // // ========================================================
-    // return FutureBuilder<dynamic>(
-    //   future: questionsManager.loadData(
-    //     firestoreDocumentID: widget.firestoreID,
-    //   ),
-    //   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    //       QuestionModel question = questionsManager.getCurrentQuestion();
-    //       return questionsManager.getIsFinished()
-    //           ? PartyFinishedPage(score: questionsManager.getCurrentScore())
-    //           : Scaffold(
-    //               appBar: AppBar(
-    //                 title: SizedBox(
-    //                   child: Text(
-    //                     (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-    //                     textAlign: TextAlign.center,
-    //                   ),
-    //                 ),
-    //               ),
-    //               body: Padding(
-    //                 padding: const EdgeInsets.all(8),
-    //                 child: Column(
-    //                   children: [
-    //                     Text("Thème :  ${question.questionSubject}"),
-    //                     Text("Question :  ${question.questionText}"),
-    //                     const SizedBox(
-    //                       height: 4,
-    //                     ),
-    //                     (question.questionType == QuestionType.IMAGE)
-    //                         ? Column(
-    //                             children: [
-    //                               Container(
-    //                                 decoration: BoxDecoration(
-    //                                   border: Border.all(width: 5),
-    //                                   borderRadius: BorderRadius.circular(5),
-    //                                 ),
-    //                                 child: Image.network(question.pictureURL),
-    //                               ),
-    //                               const SizedBox(
-    //                                 height: 10,
-    //                               ),
-    //                             ],
-    //                           )
-    //                         : const SizedBox(
-    //                             height: 5,
-    //                           ),
-    //                     Flexible(
-    //                       flex: 6,
-    //                       child: Row(
-    //                         children: [
-    //                           Flexible(
-    //                             child: Container(),
-    //                           ),
-    //                           Flexible(
-    //                             flex: 6,
-    //                             child: ListView.builder(
-    //                               itemCount: question.answerList.length,
-    //                               itemBuilder:
-    //                                   (BuildContext context, int index) {
-    //                                 return QuizzPageButton(
-    //                                   answer:
-    //                                       question.answerList.elementAt(index),
-    //                                   function: () {
-    //                                     setState(() {
-    //                                       questionsManager.submitResponse(
-    //                                           question.answerList
-    //                                               .elementAt(index));
-    //                                     });
-    //                                   },
-    //                                 );
-    //                               },
-    //                             ),
-    //                           ),
-    //                           Flexible(
-    //                             child: Container(),
-    //                           ),
-    //                         ],
-    //                       ),
-    //                     )
-    //                   ],
-    //                 ),
-    //               ),
-    //             );
-    //     } else if (snapshot.hasError) {
-    //       return Scaffold(
-    //         appBar: AppBar(
-    //           title: SizedBox(
-    //             child: Text(
-    //               (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-    //               textAlign: TextAlign.center,
-    //             ),
-    //           ),
-    //         ),
-    //         body: Center(
-    //           child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             crossAxisAlignment: CrossAxisAlignment.center,
-    //             children: const [
-    //               Icon(Icons.error_outline),
-    //               SizedBox(
-    //                 height: 8,
-    //               ),
-    //               Text(
-    //                 "Error !",
-    //               ),
-    //               Text(
-    //                 "Failed to load data...\nTry to restart if wanted.",
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       );
-    //     } else {
-    //       return Scaffold(
-    //         appBar: AppBar(
-    //           title: SizedBox(
-    //             child: Text(
-    //               (widget.firestoreID.isEmpty) ? 'Quizz' : 'Custom Quizz',
-    //               textAlign: TextAlign.center,
-    //             ),
-    //           ),
-    //         ),
-    //         body: Center(
-    //           child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             crossAxisAlignment: CrossAxisAlignment.center,
-    //             children: const [
-    //               Text(
-    //                 "Is Loading\nWaiting for connexion with the database",
-    //               ),
-    //               SizedBox(
-    //                 height: 8,
-    //               ),
-    //               CircularProgressIndicator(),
-    //             ],
-    //           ),
-    //         ),
-    //       );
-    //     }
-    //   },
-    // );
+                ),
+              );
+      },
+    );
   }
 }
