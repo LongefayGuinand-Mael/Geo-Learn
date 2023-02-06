@@ -1316,21 +1316,8 @@ class MockQuestions_DataSource implements Questions_DataSource {
           Answer(value: "Un État parlementaire co-princier", isValid: true),
         ],
       ),
-      // QuestionModel(
-      //   QuestionType.TEXT,
-      //   "Question ",
-      //   "",
-      //   "",
-      //   [
-      //     Answer(value: "", isValid: true),
-      //     Answer(value: "", isValid: false),
-      //     Answer(value: "", isValid: false),
-      //     Answer(value: "", isValid: false),
-      //     Answer(value: "", isValid: false),
-      //   ],
-      // ),
-      //
-      // // ===================================================================
+
+      // ===================================================================
       //
       // QuestionModel(
       //   QuestionType.TEXT,

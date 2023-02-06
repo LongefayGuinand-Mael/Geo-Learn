@@ -19,25 +19,13 @@ class _QRScanningPageState extends State<QRScanningPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scan for Receiving Quizz \nfrom an Other Phone'),
+        title: const Flexible(
+          child: Text(
+            'Receiving Quizz',
+            maxLines: 2,
+          ),
+        ),
         actions: [
-          // ===================== POUR DES TEST SUR PC =====================
-          // ElevatedButton(
-          //   onPressed: () {
-          //     Navigator.of(context).pop();
-          //     Navigator.of(context).push(
-          //       MaterialPageRoute(
-          //         builder: (context) => const QuizzPage(
-          //           firestoreID: "f58cf727-833d-4a6c-b3d1-035fc65e4a34",
-          //         ),
-          //       ),
-          //     );
-          //   },
-          //   child: const Text(
-          //     "Test-PC",
-          //   ),
-          // ),
-          // ================================================================
           (result == null)
               ? ElevatedButton(
                   onPressed: () async {

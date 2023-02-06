@@ -43,9 +43,7 @@ class QuestionsManager {
         questionList = questionsDataSource.getQuestions();
       } else {
         questionList = [];
-        print("Before");
         await Future.delayed(const Duration(milliseconds: 1500));
-        print("After");
         String questionListJson = await db
             .collection("SharableQuizzes")
             .doc(firestoreID)
@@ -59,7 +57,7 @@ class QuestionsManager {
         });
         if (questionListJson != "Error") {
           questionList = parseJsonStringToQuestionList(questionListJson);
-          print(questionList);
+          // print(questionList);
         } else {
           _isPartyFinish = true;
         }
@@ -91,7 +89,6 @@ class QuestionsManager {
         // We want to stop at 1 because we already reach the number of question wanted
         if (firestoreID.isEmpty) {
           //Protocole pour Quizz Perso
-          print("ID Question En Cours :  ${_currentQuestionIndex}");
           int tempIndex;
           // Do-While : Évite de lancer 2 fois la même question d'affilé
           do {
@@ -112,7 +109,6 @@ class QuestionsManager {
         // We want to stop at 1 because we already reach the number of question wanted
         if (firestoreID.isEmpty) {
           //Protocole pour Quizz Perso
-          print("ID Question En Cours :  ${_currentQuestionIndex}");
           int tempIndex;
           // Do-While : Évite de lancer 2 fois la même question d'affilé
           do {

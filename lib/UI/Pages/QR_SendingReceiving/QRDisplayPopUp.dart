@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class QRDisplayPopUp extends StatefulWidget {
-  String QRValue;
+  String qrValue;
   QRDisplayPopUp({
     super.key,
-    required this.QRValue,
+    required this.qrValue,
   });
 
   @override
@@ -15,7 +15,7 @@ class QRDisplayPopUp extends StatefulWidget {
 class _QRDisplayPopUpState extends State<QRDisplayPopUp> {
   @override
   Widget build(BuildContext context) {
-    String _QRValue = widget.QRValue;
+    String qrValue = widget.qrValue;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -39,7 +39,7 @@ class _QRDisplayPopUpState extends State<QRDisplayPopUp> {
                         'assets/images/logos/GreenLogoGeoLearn.png',
                       ),
                       size: MediaQuery.of(context).size.width * 0.75,
-                      data: _QRValue,
+                      data: qrValue,
                       errorCorrectLevel: QrErrorCorrectLevel.H,
                       typeNumber: null,
                       roundEdges: true,

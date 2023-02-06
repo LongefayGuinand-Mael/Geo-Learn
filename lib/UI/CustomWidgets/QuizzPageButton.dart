@@ -43,6 +43,7 @@ class _QuizzPageButtonState extends State<QuizzPageButton> {
             child: Center(
               child: Text(
                 widget.answer.toString(),
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Color(0xFF3A736A),
                 ),

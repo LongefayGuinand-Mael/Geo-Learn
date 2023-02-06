@@ -1,7 +1,7 @@
 import 'package:GeoLearn/Data/Models/QuestionModel.dart';
 import 'package:GeoLearn/Domain/Managers/QuizzCreationQuestionsManager.dart';
 import 'package:GeoLearn/UI/CustomWidgets/HeroDialog.dart';
-import 'package:GeoLearn/UI/CustomWidgets/QuizzPageButton.dart';
+import 'package:GeoLearn/UI/CustomWidgets/QuizzCreationButton.dart';
 import 'package:GeoLearn/UI/Pages/QR_SendingReceiving/QRDisplayPopUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +24,10 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
   String? quizzID;
   List<QuestionModel> quizzList = [];
 
-  String QuestionListToJson(List<QuestionModel> questionList) {
+  String questionListToJson(List<QuestionModel> questionList) {
     String jsonQuestionList = "[";
     for (var i = 0; i < quizzList.length; i++) {
-      jsonQuestionList += QuestionToJson(quizzList[i]);
+      jsonQuestionList += questionToJson(quizzList[i]);
       if (i + 1 < quizzList.length) {
         jsonQuestionList += ", ";
       }
@@ -37,7 +37,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
     return jsonQuestionList;
   }
 
-  String QuestionToJson(QuestionModel question) {
+  String questionToJson(QuestionModel question) {
     // print(question.toJson().toString());
     return question.toJson().toString();
   }
@@ -109,7 +109,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                               child: ListView.builder(
                                 itemCount: question.answerList.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return QuizzPageButton(
+                                  return QuizzCreationPageButton(
                                     answer:
                                         question.answerList.elementAt(index),
                                     function: () {},
@@ -143,7 +143,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // ADD QUESTION TO QUIZZLIST
+                        // ADD QUESTION TO quizzList
                         quizzList.add(question);
                         // DISPLAY A NEW QUESTION ON THE PHONE
                         setState(() {
@@ -170,7 +170,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                       quizzID = const Uuid().v4();
                       // SEND JSON TO "quizzID Firebase Doc"
                       databaseCollection.doc(quizzID).set({
-                        'json': QuestionListToJson(quizzList),
+                        'json': questionListToJson(quizzList),
                       });
                       // DISPLAY QR WITH "quizzID"
                       Navigator.of(context).pop();
@@ -178,7 +178,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                         HeroDialogRoute(
                           builder: (context) => Center(
                             child: QRDisplayPopUp(
-                              QRValue: quizzID!,
+                              qrValue: quizzID!,
                             ),
                           ),
                         ),

@@ -13,7 +13,7 @@ class Answer {
         _isValid = (json['isValid'] == 'true') ? true : false;
 
   Map<String, dynamic> toJSON() => {
-        '"value"': '"${_value}"',
+        '"value"': '"$_value"',
         '"isValid"': _isValid,
       };
 
@@ -52,9 +52,9 @@ class QuestionModel {
 
   Map<String, dynamic> toJson() => {
         '"questionType"': '"${questionType.getName}"',
-        '"questionSubject"': '"${questionSubject}"',
-        '"questionText"': '"${questionText}"',
-        '"pictureURL"': '"${pictureURL}"',
+        '"questionSubject"': '"$questionSubject"',
+        '"questionText"': '"$questionText"',
+        '"pictureURL"': '"$pictureURL"',
         '"answerList"': answerList.map((a) => a.toJSON()).toList(),
       };
 }

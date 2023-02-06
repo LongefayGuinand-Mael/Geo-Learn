@@ -16,11 +16,14 @@ class DidYouKnow extends StatefulWidget {
 
 String didYouKnowText = "";
 
-getDYK() async {
-  const apiKey = "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";
+getDYKfromGPT() async {
+  const apiKey = "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";
   final random = Random();
 
   const countryList = [
+    "Afghanistan",
+    "Algeria",
+    "Albania",
     "Andorra",
     "Angola",
     "Antigua and Barbuda",
@@ -253,7 +256,7 @@ getDYK() async {
 
   String prompt =
       "Write me a \"Did you know?\" about the country: ${countryList[random.nextInt(countryList.length)]}\nabout the subject: ${dykThemeList[random.nextInt(dykThemeList.length)]}";
-  print(prompt);
+  // print(prompt);
 
   var url = Uri.https("api.openai.com", "/v1/completions");
   final response = await http.post(
@@ -323,9 +326,6 @@ class _DidYouKnowState extends State<DidYouKnow> {
             ),
           ],
         ),
-        const SizedBox(
-          height: 2,
-        ),
         Divider(
           height: 1,
           color: Colors.black.withOpacity(0.5),
@@ -333,77 +333,152 @@ class _DidYouKnowState extends State<DidYouKnow> {
         const SizedBox(
           height: 4,
         ),
-        IntrinsicHeight(
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Text(
-                      "« ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
+        EnhancedFutureBuilder(
+            future: getDYKfromGPT(),
+            rememberFutureResult: false,
+            whenNotDone: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  SizedBox(
+                    height: 8,
+                  ),
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    "Is loading...",
+                  ),
+                ],
+              ),
+            ),
+            whenDone: (snapshot) {
+              return IntrinsicHeight(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "« ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                width: 4,
-              ),
-              Expanded(
-                  flex: 16,
-                  child: EnhancedFutureBuilder(
-                      future: getDYK(),
-                      rememberFutureResult: false,
-                      whenNotDone: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            CircularProgressIndicator(),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "Is Loading",
-                            ),
-                          ],
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Expanded(
+                      flex: 16,
+                      child: Text(
+                        didYouKnowText,
+                        textAlign: TextAlign.justify,
+                        style: const TextStyle(
+                          fontSize: 12,
                         ),
                       ),
-                      whenDone: (snapshot) {
-                        return Text(
-                          didYouKnowText,
-                          textAlign: TextAlign.justify,
-                          style: const TextStyle(
-                            fontSize: 12,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            " »",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
                           ),
-                        );
-                      })),
-              const SizedBox(
-                width: 4,
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Text(
-                      " »",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ),
+              );
+            }),
+        // IntrinsicHeight(
+        //   child: Row(
+        //     children: [
+        //       Expanded(
+        //         child: Column(
+        //           mainAxisAlignment: MainAxisAlignment.start,
+        //           children: const [
+        //             Text(
+        //               "« ",
+        //               style: TextStyle(
+        //                 color: Colors.black,
+        //                 fontWeight: FontWeight.bold,
+        //                 fontSize: 24,
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //       const SizedBox(
+        //         width: 4,
+        //       ),
+        //       Expanded(
+        //           flex: 16,
+        //           child: EnhancedFutureBuilder(
+        //               future: getDYKfromGPT(),
+        //               rememberFutureResult: false,
+        //               whenNotDone: Center(
+        //                 child: Column(
+        //                   mainAxisAlignment: MainAxisAlignment.center,
+        //                   crossAxisAlignment: CrossAxisAlignment.center,
+        //                   children: const [
+        //                     CircularProgressIndicator(),
+        //                     SizedBox(
+        //                       height: 8,
+        //                     ),
+        //                     Text(
+        //                       "Is Loading",
+        //                     ),
+        //                   ],
+        //                 ),
+        //               ),
+        //               whenDone: (snapshot) {
+        //                 return Text(
+        //                   didYouKnowText,
+        //                   textAlign: TextAlign.justify,
+        //                   style: const TextStyle(
+        //                     fontSize: 12,
+        //                   ),
+        //                 );
+        //               })),
+        //       const SizedBox(
+        //         width: 4,
+        //       ),
+        //       Expanded(
+        //         child: Column(
+        //           mainAxisAlignment: MainAxisAlignment.end,
+        //           children: const [
+        //             Text(
+        //               " »",
+        //               style: TextStyle(
+        //                 color: Colors.black,
+        //                 fontWeight: FontWeight.bold,
+        //                 fontSize: 24,
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

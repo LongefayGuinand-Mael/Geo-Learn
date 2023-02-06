@@ -1,5 +1,5 @@
 class DidYouKnowModel {
-  final text;
+  final String text;
   DidYouKnowModel(
     this.text,
   );

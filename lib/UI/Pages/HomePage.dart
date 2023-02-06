@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  var _MenuItem = MenuItem_UseCase().getMenuItem();
+  final _menuItem = MenuItem_UseCase().getMenuItem();
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +44,12 @@ class HomePage extends StatelessWidget {
                       Flexible(
                         flex: 8,
                         child: ListView.builder(
-                          itemCount: _MenuItem.length,
+                          itemCount: _menuItem.length,
                           itemBuilder: (BuildContext context, int index) {
                             return HomePageButton(
-                              labelText: _MenuItem[index].menuName,
-                              icon: _MenuItem[index].menuIcon,
-                              route: _MenuItem[index].pageRoute,
+                              labelText: _menuItem[index].menuName,
+                              icon: _menuItem[index].menuIcon,
+                              route: _menuItem[index].pageRoute,
                             );
                           },
                         ),
