@@ -1,21 +1,21 @@
 import 'package:GeoLearn/Data/Models/QuestionModel.dart';
 import 'package:flutter/material.dart';
 
-class QuizzPageButton extends StatefulWidget {
+class QuizzButton extends StatefulWidget {
   final Answer answer;
   final function;
 
-  const QuizzPageButton({
+  const QuizzButton({
     Key? key,
     required this.answer,
     required this.function,
   }) : super(key: key);
 
   @override
-  State<QuizzPageButton> createState() => _QuizzPageButtonState();
+  State<QuizzButton> createState() => _QuizzButtonState();
 }
 
-class _QuizzPageButtonState extends State<QuizzPageButton> {
+class _QuizzButtonState extends State<QuizzButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(

@@ -18,6 +18,11 @@ class QuizzCreationQuestionsManager {
     return _questions[_currentQuestionIndex];
   }
 
+  // bool getAnswerResult(Answer givenAnswer) {
+  //   bool isCorrect = givenAnswer.isValid;
+  //   return isCorrect;
+  // }
+
   Future<void> passQuestion() async {
     int tempIndex;
     do {

@@ -1,6 +1,6 @@
 import 'package:GeoLearn/Data/Models/QuestionModel.dart';
 import 'package:GeoLearn/Domain/Managers/QuestionsManager.dart';
-import 'package:GeoLearn/UI/CustomWidgets/QuizzPageButton.dart';
+import 'package:GeoLearn/UI/CustomWidgets/QuizzButton.dart';
 import 'package:GeoLearn/UI/Pages/Quizz/PartyFinishedPage.dart';
 import 'package:enhanced_future_builder/enhanced_future_builder.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +40,34 @@ class _QuizzPageState extends State<QuizzPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 16,
+              ),
               Text(
-                "Is Loading\nWaiting for connexion with the database",
+                "Is Loading",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFF4B9589),
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                  letterSpacing: 1,
+                ),
               ),
               SizedBox(
                 height: 8,
               ),
-              CircularProgressIndicator(),
+              Text(
+                "Waiting for connexion with the database",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF4B9589),
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1,
+                ),
+              ),
             ],
           ),
         ),
@@ -73,10 +94,30 @@ class _QuizzPageState extends State<QuizzPage> {
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
-                      Text("Thème :  ${question.questionSubject}"),
-                      Text("Question :  ${question.questionText}"),
+                      Text(
+                        question.questionSubject,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF4B9589),
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          letterSpacing: 1,
+                        ),
+                      ),
                       const SizedBox(
-                        height: 4,
+                        height: 8,
+                      ),
+                      Text(
+                        question.questionText,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
                       ),
                       (question.questionType == QuestionType.IMAGE)
                           ? Column(
@@ -108,7 +149,7 @@ class _QuizzPageState extends State<QuizzPage> {
                               child: ListView.builder(
                                 itemCount: question.answerList.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return QuizzPageButton(
+                                  return QuizzButton(
                                     answer:
                                         question.answerList.elementAt(index),
                                     function: () {

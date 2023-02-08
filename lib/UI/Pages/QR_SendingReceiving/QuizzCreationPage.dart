@@ -60,7 +60,7 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.95,
-                  height: MediaQuery.of(context).size.height * 0.62, // 0.65
+                  height: MediaQuery.of(context).size.height * 0.725,
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -74,10 +74,30 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                   ),
                   child: Column(
                     children: [
-                      Text("Thème :  ${question.questionSubject}"),
-                      Text("Question :  ${question.questionText}"),
+                      Text(
+                        question.questionSubject,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFF4B9589),
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          letterSpacing: 1,
+                        ),
+                      ),
                       const SizedBox(
-                        height: 4,
+                        height: 8,
+                      ),
+                      Text(
+                        question.questionText,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
                       ),
                       (question.questionType == QuestionType.IMAGE)
                           ? Column(
@@ -109,10 +129,9 @@ class _QuizzCreationPageState extends State<QuizzCreationPage> {
                               child: ListView.builder(
                                 itemCount: question.answerList.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return QuizzCreationPageButton(
+                                  return QuizzCreationButton(
                                     answer:
                                         question.answerList.elementAt(index),
-                                    function: () {},
                                   );
                                 },
                               ),

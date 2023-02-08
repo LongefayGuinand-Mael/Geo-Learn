@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:GeoLearn/Domain/UseCase/MenuItem_UseCase.dart';
 import 'package:GeoLearn/UI/CustomWidgets/DidYouKnow.dart';
-import 'package:GeoLearn/UI/CustomWidgets/HomePageButton.dart';
+import 'package:GeoLearn/UI/CustomWidgets/HomeButton.dart';
 import 'package:flutter/material.dart';
 
 //TODO ==> LOGO APP à ajouter
@@ -22,9 +24,28 @@ class HomePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.075),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.065),
+                Transform.translate(
+                  offset: Offset(
+                    -MediaQuery.of(context).size.width * 0.15,
+                    MediaQuery.of(context).size.height * 0.025,
+                  ),
+                  child: Transform.rotate(
+                    angle: -17.5 * pi / 180,
+                    child: const Text(
+                      "Geo - Learn",
+                      style: TextStyle(
+                        fontSize: 40,
+                        letterSpacing: 5,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4B9589),
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ),
                 Opacity(
-                  opacity: 0.925,
+                  opacity: 1,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Image.asset(

@@ -337,23 +337,23 @@ class _DidYouKnowState extends State<DidYouKnow> {
             future: getDYKfromGPT(),
             rememberFutureResult: false,
             whenNotDone: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  SizedBox(
-                    height: 8,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        SizedBox(
+                          height: 8,
+                        ),
+                        CircularProgressIndicator(),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "Is loading...",
+                        ),
+                      ],
+                    ),
                   ),
-                  CircularProgressIndicator(),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    "Is loading...",
-                  ),
-                ],
-              ),
-            ),
             whenDone: (snapshot) {
               return IntrinsicHeight(
                 child: Row(
