@@ -15,8 +15,7 @@ class PartyFinishedPage extends StatefulWidget {
 class _PartyFinishedPageState extends State<PartyFinishedPage> {
   @override
   Widget build(BuildContext context) {
-    // int _score = widget.score;
-    int score = 7;
+    int score = widget.score;
     int nbQuestions = widget.numberOfQuestions;
     return Scaffold(
       appBar: AppBar(

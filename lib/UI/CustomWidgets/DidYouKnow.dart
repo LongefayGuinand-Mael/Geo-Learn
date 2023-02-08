@@ -17,7 +17,7 @@ class DidYouKnow extends StatefulWidget {
 String didYouKnowText = "";
 
 getDYKfromGPT() async {
-  const apiKey = "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";
+  const apiKey = "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";
   final random = Random();
 
   const countryList = [
@@ -276,16 +276,16 @@ getDYKfromGPT() async {
     }),
   );
 
-  Map<String, dynamic> newresponse = jsonDecode(response.body);
-  // print(newresponse['choices'][0]['text'].trim());
+  Map<String, dynamic> _GPTresponse = jsonDecode(response.body);
+  // print(_GPTresponse['choices'][0]['text'].trim());
 
   // Verify if there is an error with the API or not
-  if (newresponse['choices'][0]['text'].substring(0, 36) ==
+  if (_GPTresponse['choices'][0]['text'].substring(0, 36) ==
       "package com.example.demo.controller;") {
     didYouKnowText = "Error on loading... \nTry il later";
     return;
   }
-  didYouKnowText = newresponse['choices'][0]['text'].trim();
+  didYouKnowText = _GPTresponse['choices'][0]['text'].trim();
   return;
 }
 
@@ -337,23 +337,23 @@ class _DidYouKnowState extends State<DidYouKnow> {
             future: getDYKfromGPT(),
             rememberFutureResult: false,
             whenNotDone: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        SizedBox(
-                          height: 8,
-                        ),
-                        CircularProgressIndicator(),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "Is loading...",
-                        ),
-                      ],
-                    ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  SizedBox(
+                    height: 8,
                   ),
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    "Is loading...",
+                  ),
+                ],
+              ),
+            ),
             whenDone: (snapshot) {
               return IntrinsicHeight(
                 child: Row(
