@@ -1,8 +1,8 @@
-import 'package:GeoLearn/Data/Models/MenuItem_Model.dart';
+import 'package:GeoLearn/Data/Models/MenuItemModel.dart';
 
 class MenuItem_DataSource {
-  List<MenuItem_Model> getAllMenuItem() {
-    return this.getAllMenuItem();
+  List<MenuItemModel> getAllMenuItem() {
+    return getAllMenuItem();
     // return this.empty();
   }
 }

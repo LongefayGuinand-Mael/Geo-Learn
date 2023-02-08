@@ -1,7 +1,7 @@
-import 'package:GeoLearn/Data/Models/Question_Model.dart';
+import 'package:GeoLearn/Data/Models/QuestionModel.dart';
 
 class Questions_DataSource {
-  List<Question_Model> getQuestions() {
+  List<QuestionModel> getQuestions() {
     return List.empty();
   }
 }

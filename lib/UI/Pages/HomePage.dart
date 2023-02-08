@@ -1,7 +1,8 @@
-import 'package:GeoLearn/Domain/UseCase/DYK_UseCase.dart';
+import 'dart:math';
+
 import 'package:GeoLearn/Domain/UseCase/MenuItem_UseCase.dart';
 import 'package:GeoLearn/UI/CustomWidgets/DidYouKnow.dart';
-import 'package:GeoLearn/UI/CustomWidgets/HomePageButton.dart';
+import 'package:GeoLearn/UI/CustomWidgets/HomeButton.dart';
 import 'package:flutter/material.dart';
 
 //TODO ==> LOGO APP à ajouter
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  var _MenuItem = MenuItem_UseCase().getMenuItem();
+  final _menuItem = MenuItem_UseCase().getMenuItem();
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,28 @@ class HomePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.065),
+                Transform.translate(
+                  offset: Offset(
+                    -MediaQuery.of(context).size.width * 0.15,
+                    MediaQuery.of(context).size.height * 0.025,
+                  ),
+                  child: Transform.rotate(
+                    angle: -17.5 * pi / 180,
+                    child: const Text(
+                      "Geo - Learn",
+                      style: TextStyle(
+                        fontSize: 40,
+                        letterSpacing: 5,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4B9589),
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ),
                 Opacity(
-                  opacity: 0.925,
+                  opacity: 1,
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Image.asset(
@@ -35,9 +55,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
-                DidYouKnow(
-                  didYouKnowText: DidYouKnow_UseCase().getTodayDidYouKnow(),
-                ),
+                const DidYouKnow(),
                 Flexible(
                   child: Row(
                     children: [
@@ -45,14 +63,14 @@ class HomePage extends StatelessWidget {
                         child: Container(),
                       ),
                       Flexible(
-                        flex: 6,
+                        flex: 8,
                         child: ListView.builder(
-                          itemCount: _MenuItem.length,
+                          itemCount: _menuItem.length,
                           itemBuilder: (BuildContext context, int index) {
                             return HomePageButton(
-                              labelText: _MenuItem[index].menuName,
-                              icon: _MenuItem[index].menuIcon,
-                              route: _MenuItem[index].pageRoute,
+                              labelText: _menuItem[index].menuName,
+                              icon: _menuItem[index].menuIcon,
+                              route: _menuItem[index].pageRoute,
                             );
                           },
                         ),
